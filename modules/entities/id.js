@@ -1,0 +1,4 @@
+var generateId = 
+  ( keyWord ) => (
+    keyWord
+  );

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Finance</title>
+</head>
+<body>
+  <h2 id="currentMonthTableHeading">Current Month Table</h2>
+  <table style="border: 1px solid black; border-collapse: collapse;">
+    <tbody id="currentMonthTableBody"></tbody>
+  </table>
+
+  <h2>Categories Table</h2>
+  <table style="border: 1px solid black; border-collapse: collapse;">
+    <tbody id="categoryTable"></tbody>
+  </table>
+  
+  <script type="module" src="main.js"></script>
+
+  <template id="recordRowHeading">
+    <tr>
+      <th style="border: 1px solid black; padding: 5px;"></th>
+      <th style="border: 1px solid black; padding: 5px;"></th>
+      <th style="border: 1px solid black; padding: 5px;"></th>
+      <th style="border: 1px solid black; padding: 5px;"></th>
+      <th style="border: 1px solid black; padding: 5px;"></th>
+    </tr>
+  </template>
+
+  <template id="recordRow">
+    <tr>
+      <th style="border: 1px solid black; padding: 5px;"></th>
+      <td style="border: 1px solid black; padding: 5px;"></td>
+      <td style="border: 1px solid black; padding: 5px;"></td>
+      <td style="border: 1px solid black; padding: 5px;"></td>
+      <td style="border: 1px solid black; padding: 5px;"></td>
+    </tr>
+  </template>
+
+  <template id="categoryRowHeading">
+    <tr>
+      <th style="border: 1px solid black; padding: 5px;"></th>
+      <th style="border: 1px solid black; padding: 5px;"></th>
+      <th style="border: 1px solid black; padding: 5px;"></th>
+    </tr>
+  </template>
+
+  <template id="categoryRow">
+    <tr>
+      <th style="border: 1px solid black; padding: 5px;"></th>
+      <td style="border: 1px solid black; padding: 5px;"></td>
+      <td style="border: 1px solid black; padding: 5px;"></td>
+    </tr>
+  </template>
+
+  <template id="categoryForm">
+    <form>
+      <input />
+
+      <button type="submit">Create Category</button>
+    </form>
+  </template>
+</body>
+</html>
