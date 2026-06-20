@@ -1,7 +1,7 @@
 var renderCategoryTable = ( categoryManager ) => {
   var categoryTable = document.querySelector('#categoryTable');
-  var categoryRowHeadingTemplate = document.querySelector('#categoryRowHeading');
-  var categoryRowTemplate = document.querySelector('#categoryRow');
+  var categoryRowHeadingTemplate = document.querySelector('#categoryRowHeadingTemplate');
+  var categoryRowTemplate = document.querySelector('#categoryRowTemplate');
 
   var categories = Object.values(categoryManager.state);
 

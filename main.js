@@ -1,4 +1,4 @@
-import { CategoryManager, ExpenseCalendar, renderCalendarTable, renderCategoryTable } from './application/index.js';
+import { CategoryManager, ExpenseCalendar, renderCalendarTable, renderCategoryForm, renderCategoryTable } from './application/index.js';
 import { CATEGORIES_TYPE, createCategory, createRecord } from './modules/entities/index.js';
 
 var categoryManager = new CategoryManager();
@@ -33,3 +33,4 @@ console.log( 'categoryManager', categoryManager );
 
 renderCalendarTable( expenseCalendar );
 renderCategoryTable( categoryManager );
+renderCategoryForm( categoryManager );

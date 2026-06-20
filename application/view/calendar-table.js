@@ -4,8 +4,8 @@ var renderCalendarTable = ( expenseCalendar ) => {
 
   var currentMonthTableHeading = document.querySelector('#currentMonthTableHeading');
   var currentMonthTableBody = document.querySelector('#currentMonthTableBody');
-  var tableRowTemplate = document.querySelector('#recordRow');
-  var tableRowHeadingTemplate = document.querySelector('#recordRowHeading');
+  var tableRowTemplate = document.querySelector('#recordRowTemplate');
+  var tableRowHeadingTemplate = document.querySelector('#recordRowHeadingTemplate');
 
   currentMonthTableHeading.textContent = `${currentMonthTableHeading.textContent} (${currentMonth.monthNumber}.${currentMonth.yearNumber})`;
 
