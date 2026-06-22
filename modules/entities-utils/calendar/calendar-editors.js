@@ -1,4 +1,5 @@
-import { createInitialDay, initialMonth } from "../../entities/index.js";
+import { createInitialDay } from "../../entities/day.js";
+import { initialMonth } from "../../entities/month.js";
 
 var updateCalendarMonth = 
   ( calendarState ) => 

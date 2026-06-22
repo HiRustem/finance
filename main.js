@@ -1,5 +1,8 @@
-import { CategoryManager, ExpenseCalendar, renderCalendarTable, renderCategoryForm, renderCategoryTable } from './application/index.js';
-import { CATEGORIES_TYPE, createCategory, createRecord } from './modules/entities/index.js';
+import { CATEGORIES_TYPE, createCategory } from './modules/entities/category.js';
+import { createRecord } from './modules/entities/record.js';
+import { ExpenseCalendar } from './application/model/expense-manager.js';
+import { CategoryManager } from './application/model/category-manager.js';
+import { renderCalendarTable } from './application/view/calendar-table.js';
 
 var categoryManager = new CategoryManager();
 categoryManager.addCategory( createCategory( 'id' )( CATEGORIES_TYPE.INCOME )( 'Category' )( 'Description' )  );
@@ -32,5 +35,3 @@ categoryManager.removeCategory( 'id' );
 console.log( 'categoryManager', categoryManager );
 
 renderCalendarTable( expenseCalendar );
-renderCategoryTable( categoryManager );
-renderCategoryForm( categoryManager );

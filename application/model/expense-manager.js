@@ -1,22 +1,9 @@
-import { createDayString, createMonthString, createYearString, emptyCalendarState } from "../../modules/entities/index.js";
-import {
-  updateCalendarMonth,
-  getCalendarMonthIncome,
-  getCalendarMonthConsumption,
-  getCalendarDay, 
-  getCalendarMonth,
-  addRecordToCalendar,
-  removeRecordFromCalendar,
-  makeCalendarOperationWrapper,
-  addEmptyMonth,
-  addEmptyDay,
-  updateMonthIncome,
-  updateMonthConsumption,
-  getCalendarYear,
-  addEmptyYear,
-  getCalendarRecordByIndex,
-  getCalendarRecordById,
-} from '../../modules/entities-utils/index.js';
+import { updateMonthConsumption, updateMonthIncome } from '../../modules/entities-utils/month/month-editors.js';
+import { emptyCalendarState } from "../../modules/entities/calendar.js";
+import { createDayString, createMonthString, createYearString } from "../../modules/entities/date.js";
+import { makeCalendarOperationWrapper } from '../../modules/entities-utils/calendar/calendar-wrapper.js';
+import { addEmptyDay, addEmptyMonth, addEmptyYear, addRecordToCalendar, removeRecordFromCalendar, updateCalendarMonth } from '../../modules/entities-utils/calendar/calendar-editors.js';
+import { getCalendarDay, getCalendarMonth, getCalendarMonthConsumption, getCalendarMonthIncome, getCalendarRecordById, getCalendarRecordByIndex, getCalendarYear } from '../../modules/entities-utils/calendar/calendar-getters.js';
 
 function ExpenseCalendar(state) {
   this.state = state ?? emptyCalendarState;

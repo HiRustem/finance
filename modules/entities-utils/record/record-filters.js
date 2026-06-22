@@ -1,4 +1,4 @@
-import { CATEGORIES_TYPE } from "../../entities/index.js";
+import { CATEGORIES_TYPE } from "../../entities/category.js";
 
 var makeFilterRecords = 
   ( predicate ) =>

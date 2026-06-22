@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Categories Page</title>
+</head>
+<body>
+  <a href="index.html">Back to main</a>
+
+  <h2>Categories Table</h2>
+  <table style="border: 1px solid black; border-collapse: collapse;">
+    <tbody id="categoryTable"></tbody>
+  </table>
+
+  <div id="categoryFormBlock">
+    <h2>New Category Form</h2>
+  </div>
+
+  <template id="categoryRowHeadingTemplate">
+    <tr>
+      <th style="border: 1px solid black; padding: 5px;"></th>
+      <th style="border: 1px solid black; padding: 5px;"></th>
+      <th style="border: 1px solid black; padding: 5px;"></th>
+    </tr>
+  </template>
+
+  <template id="categoryRowTemplate">
+    <tr>
+      <th style="border: 1px solid black; padding: 5px;"></th>
+      <td style="border: 1px solid black; padding: 5px;"></td>
+      <td style="border: 1px solid black; padding: 5px;"></td>
+    </tr>
+  </template>
+
+  <template id="categoryFormTemplate">
+    <form style="display: flex; flex-direction: column;">
+      <input id="categoryName" name="categoryName" type="text" />
+      <textarea name="#description" type="text"></textarea>
+
+      <fieldset id="categoryTypeFieldset"></fieldset>
+
+      <button type="submit">Create Category</button>
+    </form>
+  </template>
+
+  <script type="module" src="categories.js"></script>
+</body>
+</html>
