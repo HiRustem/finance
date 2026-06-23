@@ -6,16 +6,20 @@
   <title>Categories Page</title>
 </head>
 <body>
-  <a href="index.html">Back to main</a>
+  <a href="../../index.html">Back to main</a>
 
   <h2>Categories Table</h2>
   <table style="border: 1px solid black; border-collapse: collapse;">
     <tbody id="categoryTable"></tbody>
   </table>
 
-  <div id="categoryFormBlock">
-    <h2>New Category Form</h2>
-  </div>
+  <button id="createCategoryDialogButton">Create Category</button>
+
+  <dialog id="createCategoryFormDialog" popover="auto">
+    <h3>New Category Form</h3>
+
+    <button >Close Dialog</button>
+  </dialog>
 
   <template id="categoryRowHeadingTemplate">
     <tr>
@@ -33,10 +37,10 @@
     </tr>
   </template>
 
-  <template id="categoryFormTemplate">
+  <template id="createCategoryFormTemplate">
     <form style="display: flex; flex-direction: column;">
       <input id="categoryName" name="categoryName" type="text" />
-      <textarea name="#description" type="text"></textarea>
+      <textarea id="categoryDescription" name="categoryDescription" type="text"></textarea>
 
       <fieldset id="categoryTypeFieldset"></fieldset>
 
