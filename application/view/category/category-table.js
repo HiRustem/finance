@@ -10,6 +10,8 @@ var renderCategoryTable = ( categoryManager ) => {
   var categoryRowHeadingTemplateCells = categoryRowHeadingTemplateClone.querySelectorAll( 'th' );
 
   requestAnimationFrame(() => {
+    categoryTable.hasChildNodes() ? categoryTable.replaceChildren([]) : categoryTable;
+
     categoryRowHeadingTemplateCells[0].textContent = 'Id';
     categoryRowHeadingTemplateCells[1].textContent = 'Name';
     categoryRowHeadingTemplateCells[2].textContent = 'Description';

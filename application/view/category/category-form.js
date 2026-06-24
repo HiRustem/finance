@@ -1,37 +1,51 @@
 import { CATEGORIES_TYPE, createCategory } from "../../../modules/entities/category.js";
 
-var renderCategoryForm = ( categoryManager ) => {
+var renderCategoryFormDialog = ( categoryManager ) => ( onCategoryCreated ) => {
   var cachedCreateCategoryFormObject = null;
 
   var createCategoryFormDialog = document.querySelector('#createCategoryFormDialog');
+  var createCategoryFormDialogOpenButton = document.querySelector('#createCategoryFormDialogOpenButton');
   var createCategoryFormDialogCloseButton = createCategoryFormDialog.querySelector('button');
-  var createCategoryDialogButton = document.querySelector('#createCategoryDialogButton');
 
-  var openCreateCategoryDialog = () => {
-    return !!cachedCreateCategoryFormObject ? ( createCategoryFormDialog.showModal() ) : ( cachedCreateCategoryFormObject = initCreateCategoryFormObject(), createCategoryFormDialog.show() );
+  createCategoryFormDialogOpenButton.onclick = ( event ) => {
+    createCategoryFormDialog.showModal();
   }
+
+  createCategoryFormDialogCloseButton.onclick = () => (
+    createCategoryFormDialog.close()
+  )
 
   var initCreateCategoryFormObject = () => {
-    var createCategoryFormDialog = document.querySelector('#createCategoryFormDialog');
-    var createCategoryFormDialogH3 = createCategoryFormDialog.querySelector('h3');
-    var createCategoryFormObject = makeCreateCategoryFormObject( categoryManager )( Object.keys( CATEGORIES_TYPE ) );
-    
-    createCategoryFormDialogH3.after( createCategoryFormObject.node );
+    var createCategoryFormHeader = createCategoryFormDialog.querySelector('#createCategoryFormHeader');
 
-    console.log('отработал');
+    cachedCreateCategoryFormObject = (
+      makeCreateCategoryFormObject( categoryManager )
+      ( CATEGORIES_TYPE )
+      ( 
+        () => (
+          createCategoryFormDialog.close(),
+          onCategoryCreated()
+        ) 
+      ) 
+    );
 
-    return createCategoryFormObject;
+    createCategoryFormHeader.after( cachedCreateCategoryFormObject.node );
   }
 
-  var closeCreateCategoryDialog = () => {
-    return ( cachedCreateCategoryFormObject.resetFields(), createCategoryFormDialog.close() );
-  }
-
-  createCategoryDialogButton.onclick = openCreateCategoryDialog;
-  createCategoryFormDialogCloseButton.onclick = closeCreateCategoryDialog;
+  createCategoryFormDialog.addEventListener("beforetoggle", (e) => (
+    requestAnimationFrame(() => (
+      e.newState === 'open' 
+    ? (
+      !cachedCreateCategoryFormObject ? initCreateCategoryFormObject() : null
+      ) 
+    : (
+        cachedCreateCategoryFormObject.resetFields()
+      )
+    ))
+  ));
 }
 
-var makeCreateCategoryFormObject = ( categoryManager ) => ( categoryTypes ) => {
+var makeCreateCategoryFormObject = ( categoryManager ) => ( categoriesTypesEnum ) => ( onCategoryCreated ) => {
   var createCategoryFormTemplate = document.querySelector('#createCategoryFormTemplate');
   var createCategoryFormTemplateClone = document.importNode( createCategoryFormTemplate.content, true );
 
@@ -40,6 +54,8 @@ var makeCreateCategoryFormObject = ( categoryManager ) => ( categoryTypes ) => {
   var createCategoryFormDescriptionTextarea = createCategoryForm.querySelector('#categoryDescription');
   var createCategoryFormTypeFieldset = createCategoryForm.querySelector('#categoryTypeFieldset');
   var createCategoryFormSubmitButton = createCategoryForm.querySelector('button');
+
+  var categoryTypes = Object.keys( categoriesTypesEnum );
 
   for (let i = 0; i < categoryTypes.length; i++) {
     var inputElement = document.createElement('input');
@@ -59,9 +75,16 @@ var makeCreateCategoryFormObject = ( categoryManager ) => ( categoryTypes ) => {
   var onSubmit = ( event ) => {
     event.preventDefault();
 
-    console.log('new category', createCategory( `categoryId: ${Math.random()}` )(  ));
+    var checkedRadioElement = Array.from(createCategoryFormTypeFieldset.querySelectorAll('input')).find(( element ) => !!element.checked );
 
-    // categoryManager.addCategory( createCategory( `categoryId: ${Math.random()}` )(  ) );
+    categoryManager.addCategory( 
+      createCategory( `categoryId: ${Math.random()}` )
+      ( CATEGORIES_TYPE[checkedRadioElement.value] )
+      ( createCategoryFormNameInput.value )
+      ( createCategoryFormDescriptionTextarea.value )
+    );
+
+    onCategoryCreated?.();
   }
 
   var resetFields = () => {
@@ -75,9 +98,10 @@ var makeCreateCategoryFormObject = ( categoryManager ) => ( categoryTypes ) => {
     }
   };
 
-  var getFormFieldsValues = () => {
-    
-  }
+  var getFormFieldsValues = () => ({
+    categoryName: createCategoryFormNameInput.value,
+    categoryDescription: createCategoryFormDescriptionTextarea.value
+  });
 
   createCategoryFormSubmitButton.onclick = onSubmit;
 
@@ -88,4 +112,4 @@ var makeCreateCategoryFormObject = ( categoryManager ) => ( categoryTypes ) => {
   };
 }
 
-export { renderCategoryForm };
+export { renderCategoryFormDialog };
