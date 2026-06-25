@@ -3,8 +3,8 @@ var renderCategoryTable = ( categoryManager ) => {
   var categoryRowHeadingTemplate = document.querySelector('#categoryRowHeadingTemplate');
   var categoryRowTemplate = document.querySelector('#categoryRowTemplate');
 
-  var categories = Object.values(categoryManager.state);
-
+  var categories = Object.values(categoryManager.getState());
+  
   var categoryRowHeadingTemplateClone = document.importNode( categoryRowHeadingTemplate.content, true );
 
   var categoryRowHeadingTemplateCells = categoryRowHeadingTemplateClone.querySelectorAll( 'th' );

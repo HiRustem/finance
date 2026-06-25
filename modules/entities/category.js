@@ -3,6 +3,8 @@ var CATEGORIES_TYPE = Object.freeze({
   CONSUMPTION: Symbol( 'CONSUMPTION' ),
 });
 
+var CATEGORY_ID_KEYWORD = 'categoryId';
+
 var createCategory = 
   ( id ) =>
   ( type ) => 
@@ -16,5 +18,6 @@ var createCategory =
 
 export { 
   CATEGORIES_TYPE,
+  CATEGORY_ID_KEYWORD,
   createCategory
 };

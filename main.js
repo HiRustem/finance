@@ -1,8 +1,8 @@
 import { CATEGORIES_TYPE, createCategory } from './modules/entities/category.js';
 import { createRecord } from './modules/entities/record.js';
-import { ExpenseCalendar } from './application/model/expense-manager.js';
-import { CategoryManager } from './application/model/category-manager.js';
 import { renderCalendarTable } from './application/view/calendar/calendar-table.js';
+import { CategoryManager } from './application/model/category/category-manager.js';
+import { ExpenseCalendar } from './application/model/expense/expense-manager.js';
 
 var categoryManager = new CategoryManager();
 categoryManager.addCategory( createCategory( 'id' )( CATEGORIES_TYPE.INCOME )( 'Category' )( 'Description' )  );

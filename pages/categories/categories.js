@@ -1,16 +1,18 @@
-import { CategoryManager } from "../../application/model/category-manager.js";
 import { renderCategoryTable } from '../../application/view/category/category-table.js';
 import { renderCategoryFormDialog } from '../../application/view/category/category-form.js';
-import { CATEGORIES_TYPE, createCategory } from "../../modules/entities/category.js";
+import { CategoryManager } from '../../application/model/category/category-manager.js';
+import { CategoryDataManager } from '../../application/model/category/category-data-manager.js';
 
-var categoryManager = new CategoryManager();
-categoryManager.addCategory( 
-  createCategory( 'id' )( CATEGORIES_TYPE.INCOME )( 'Category' )( 'Description' ) 
-);
-
-categoryManager.addCategory( 
-  createCategory( 'id2' )( CATEGORIES_TYPE.INCOME )( 'Another' )( 'Description' ) 
+var categoryDataManager = new CategoryDataManager();
+var categoryManager = new CategoryManager( 
+  JSON.parse( 
+    categoryDataManager.getCategoryDataState() 
+  ) 
 );
 
 renderCategoryTable( categoryManager );
-renderCategoryFormDialog( categoryManager )( () => renderCategoryTable( categoryManager ) );
+renderCategoryFormDialog( categoryManager )
+  ( categoryDataManager )
+  ( 
+    () => renderCategoryTable( categoryManager ) 
+  );

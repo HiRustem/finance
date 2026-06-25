@@ -16,6 +16,8 @@ function CategoryManager(state) {
   this.findCategoryByName = ( name ) => (
     Object.values( this.state ).filter( ( category ) => ( category.name.includes( name ) ) )
   )
+
+  this.getState = () => ( this.state );
 }
 
 export { CategoryManager };

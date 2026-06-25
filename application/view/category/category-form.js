@@ -1,6 +1,7 @@
-import { CATEGORIES_TYPE, createCategory } from "../../../modules/entities/category.js";
+import { CATEGORIES_TYPE, CATEGORY_ID_KEYWORD, createCategory } from "../../../modules/entities/category.js";
+import { generateId } from "../../../modules/entities/id.js";
 
-var renderCategoryFormDialog = ( categoryManager ) => ( onCategoryCreated ) => {
+var renderCategoryFormDialog = ( categoryManager ) => ( categoryDataManager ) => ( onCategoryCreated ) => {
   var cachedCreateCategoryFormObject = null;
 
   var createCategoryFormDialog = document.querySelector('#createCategoryFormDialog');
@@ -20,6 +21,7 @@ var renderCategoryFormDialog = ( categoryManager ) => ( onCategoryCreated ) => {
 
     cachedCreateCategoryFormObject = (
       makeCreateCategoryFormObject( categoryManager )
+      ( categoryDataManager )
       ( CATEGORIES_TYPE )
       ( 
         () => (
@@ -45,71 +47,78 @@ var renderCategoryFormDialog = ( categoryManager ) => ( onCategoryCreated ) => {
   ));
 }
 
-var makeCreateCategoryFormObject = ( categoryManager ) => ( categoriesTypesEnum ) => ( onCategoryCreated ) => {
-  var createCategoryFormTemplate = document.querySelector('#createCategoryFormTemplate');
-  var createCategoryFormTemplateClone = document.importNode( createCategoryFormTemplate.content, true );
+var makeCreateCategoryFormObject = 
+  ( categoryManager ) => 
+  ( categoryDataManager ) => 
+  ( categoriesTypesEnum ) => 
+  ( onCategoryCreated ) => 
+  {
+    var createCategoryFormTemplate = document.querySelector('#createCategoryFormTemplate');
+    var createCategoryFormTemplateClone = document.importNode( createCategoryFormTemplate.content, true );
 
-  var createCategoryForm = createCategoryFormTemplateClone.querySelector('form');
-  var createCategoryFormNameInput = createCategoryForm.querySelector('#categoryName');
-  var createCategoryFormDescriptionTextarea = createCategoryForm.querySelector('#categoryDescription');
-  var createCategoryFormTypeFieldset = createCategoryForm.querySelector('#categoryTypeFieldset');
-  var createCategoryFormSubmitButton = createCategoryForm.querySelector('button');
+    var createCategoryForm = createCategoryFormTemplateClone.querySelector('form');
+    var createCategoryFormNameInput = createCategoryForm.querySelector('#categoryName');
+    var createCategoryFormDescriptionTextarea = createCategoryForm.querySelector('#categoryDescription');
+    var createCategoryFormTypeFieldset = createCategoryForm.querySelector('#categoryTypeFieldset');
+    var createCategoryFormSubmitButton = createCategoryForm.querySelector('button');
 
-  var categoryTypes = Object.keys( categoriesTypesEnum );
+    var categoryTypes = Object.keys( categoriesTypesEnum );
 
-  for (let i = 0; i < categoryTypes.length; i++) {
-    var inputElement = document.createElement('input');
-    inputElement.name = 'type';
-    inputElement.type = 'radio';
-    inputElement.value = categoryTypes[i];
-    inputElement.setAttribute( 'id', `radio-${categoryTypes[i]}` );
+    for (let i = 0; i < categoryTypes.length; i++) {
+      var inputElement = document.createElement('input');
+      inputElement.name = 'type';
+      inputElement.type = 'radio';
+      inputElement.value = categoryTypes[i];
+      inputElement.setAttribute( 'id', `radio-${categoryTypes[i]}` );
 
-    var labelInput = document.createElement('label');
-    labelInput.setAttribute('for', `radio-${categoryTypes[i]}`);
-    labelInput.textContent = inputElement.value;
+      var labelInput = document.createElement('label');
+      labelInput.setAttribute('for', `radio-${categoryTypes[i]}`);
+      labelInput.textContent = inputElement.value;
 
-    createCategoryFormTypeFieldset.appendChild( inputElement );
-    createCategoryFormTypeFieldset.appendChild( labelInput );
-  }
-
-  var onSubmit = ( event ) => {
-    event.preventDefault();
-
-    var checkedRadioElement = Array.from(createCategoryFormTypeFieldset.querySelectorAll('input')).find(( element ) => !!element.checked );
-
-    categoryManager.addCategory( 
-      createCategory( `categoryId: ${Math.random()}` )
-      ( CATEGORIES_TYPE[checkedRadioElement.value] )
-      ( createCategoryFormNameInput.value )
-      ( createCategoryFormDescriptionTextarea.value )
-    );
-
-    onCategoryCreated?.();
-  }
-
-  var resetFields = () => {
-    createCategoryFormNameInput.value = '';
-    createCategoryFormDescriptionTextarea.value = '';
-
-    var fieldSetRadioElements = createCategoryFormTypeFieldset.querySelectorAll('input');
-
-    for (let i = 0; i < fieldSetRadioElements.length; i++) {
-      fieldSetRadioElements[i].checked = false;
+      createCategoryFormTypeFieldset.appendChild( inputElement );
+      createCategoryFormTypeFieldset.appendChild( labelInput );
     }
-  };
 
-  var getFormFieldsValues = () => ({
-    categoryName: createCategoryFormNameInput.value,
-    categoryDescription: createCategoryFormDescriptionTextarea.value
-  });
+    var onSubmit = ( event ) => {
+      event.preventDefault();
 
-  createCategoryFormSubmitButton.onclick = onSubmit;
+      var checkedRadioElement = Array.from(createCategoryFormTypeFieldset.querySelectorAll('input')).find(( element ) => !!element.checked );
 
-  return {
-    node: createCategoryFormTemplateClone,
-    resetFields,
-    getFormFieldsValues,
-  };
+      categoryManager.addCategory( 
+        createCategory( generateId( CATEGORY_ID_KEYWORD ) )
+        ( CATEGORIES_TYPE[checkedRadioElement.value] )
+        ( createCategoryFormNameInput.value )
+        ( createCategoryFormDescriptionTextarea.value )
+      );
+
+      onCategoryCreated?.();
+
+      categoryDataManager.updateCategories( categoryManager.getState() );
+    }
+
+    var resetFields = () => {
+      createCategoryFormNameInput.value = '';
+      createCategoryFormDescriptionTextarea.value = '';
+
+      var fieldSetRadioElements = createCategoryFormTypeFieldset.querySelectorAll('input');
+
+      for (let i = 0; i < fieldSetRadioElements.length; i++) {
+        fieldSetRadioElements[i].checked = false;
+      }
+    };
+
+    var getFormFieldsValues = () => ({
+      categoryName: createCategoryFormNameInput.value,
+      categoryDescription: createCategoryFormDescriptionTextarea.value
+    });
+
+    createCategoryFormSubmitButton.onclick = onSubmit;
+
+    return {
+      node: createCategoryFormTemplateClone,
+      resetFields,
+      getFormFieldsValues,
+    };
 }
 
 export { renderCategoryFormDialog };
