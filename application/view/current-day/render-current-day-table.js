@@ -1,4 +1,7 @@
+// TODO: fix double fillCurrentDayTableHeading and renderCurrentDayTableCaption work
+
 var renderCurrentDayTable = ( expenseCalendar ) => {
+
   var currentMonth = expenseCalendar.getCurrentMonth();
   var currentMonthDays = Object.values( currentMonth.days );
 
@@ -32,7 +35,7 @@ var renderCurrentDayTable = ( expenseCalendar ) => {
 }
 
 var fillCurrentDayTableHeading = ( currentMonth ) => {
-  var currentDayTableHeading = document.querySelector('#currentDayTableHeading');
+  var currentDayTableHeading = document.querySelector('#currentDayTableHeading > span');
 
   currentDayTableHeading.textContent = `${currentDayTableHeading.textContent} (${String(currentMonth.monthNumber).padStart(2, '0')}.${currentMonth.yearNumber})`;
 }

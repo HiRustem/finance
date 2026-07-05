@@ -9,7 +9,10 @@
 <body>
   <a href="../../index.html">Back to main</a>
 
-  <h2>Categories Table</h2>
+  <h2 style="display: flex; align-items: center; justify-content: space-between;">
+    Categories Table 
+    <button id="createCategoryFormDialogOpenButton">Open Create Category Form Dialog</button>
+  </h2>
   <table style="width: 100%; border: 1px solid black; border-collapse: collapse;">
     <thead>
       <th style="border: 1px solid black; padding: 5px;">Id</th>
@@ -20,8 +23,6 @@
     </thead>
     <tbody id="categoryTableBody"></tbody>
   </table>
-
-  <button id="createCategoryFormDialogOpenButton">Create Category</button>
 
   <dialog id="createCategoryFormDialog" closedby="any">
     <div id="createCategoryFormHeader" style="display: flex; justify-content: space-between; align-items: center; gap: 20px;">
@@ -43,8 +44,8 @@
 
   <template id="createCategoryFormTemplate">
     <form style="display: flex; flex-direction: column; gap: 20px;">
-      <input id="categoryName" name="categoryName" type="text" />
-      <textarea id="categoryDescription" name="categoryDescription" type="text"></textarea>
+      <input id="categoryName" name="categoryName" type="text" placeholder="Enter category name" />
+      <textarea id="categoryDescription" name="categoryDescription" type="text" placeholder="Enter category description"></textarea>
 
       <fieldset id="categoryTypeFieldset">
         <legend>Select category type</legend>

@@ -1,7 +1,11 @@
 import { renderCategoriesTable } from "../category/render-categories-table.js";
+import { createRecord, RECORD_ID_KEYWORD } from '../../../modules/entities/record.js';
+import { generateId } from "../../../modules/entities/id.js";
 
 var renderCreateRecordFormDialog = 
-( categoryManager ) => {
+( categoryManager ) => 
+( expenseCalendar ) =>
+( onChange ) => {
   var cachedCreateRecordFormObject = { instance: null };
 
   var createRecordFormDialog = document.querySelector('#createRecordFormDialog');
@@ -17,7 +21,13 @@ var renderCreateRecordFormDialog =
       ( createRecordFormDialog )
       ( cachedCreateRecordFormObject )
       ( 
-        () => ( makeCreateRecordFormObject( categoryManager ) ) 
+        () => ( 
+          makeCreateRecordFormObject
+          ( createRecordFormDialog )
+          ( categoryManager )
+          ( expenseCalendar ) 
+          ( onChange )
+        ) 
       ) 
     ) 
   );
@@ -56,7 +66,10 @@ var initCreateRecordFormObject =
 }
 
 var makeCreateRecordFormObject = 
-( categoryManager ) => {
+( createRecordFormDialog ) =>
+( categoryManager ) =>
+( expenseCalendar ) =>
+( onChange ) => {
   var selectedCategory = null;
   var categoriesTableDialog = document.querySelector('#categoriesTableDialog');
   var createRecordFormTemplate = document.querySelector('#createRecordFormTemplate');
@@ -78,15 +91,28 @@ var makeCreateRecordFormObject =
         selectedCategoryParagraphSpan.textContent = selectedCategory.name,
         categoriesTableDialog.close()
       ),
-      textContent: 'Add',
+      textContent: 'Select',
     })
     ( categoryManager ),
     categoriesTableDialog.showModal()
   );
 
-  var onSubmit = () => {
-
-  }
+  var onSubmit = ( event ) => (
+    ( event.preventDefault() ),
+    (
+      expenseCalendar.addRecord(
+        createRecord
+        ( generateId( RECORD_ID_KEYWORD ) )
+        ( 'RUB' )
+        ( selectedCategory )
+        ( createRecordFormNameInput.value )
+        ( createRecordFormDescriptionTextarea.value )
+        ( createRecordFormAmountInput.value )
+      )
+    ),
+    createRecordFormDialog.close(),
+    onChange?.()
+  );
 
   var resetFields = () => (
     createRecordFormNameInput.value = '',

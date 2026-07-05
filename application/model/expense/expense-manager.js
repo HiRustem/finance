@@ -8,6 +8,8 @@ import { getCalendarDay, getCalendarMonth, getCalendarMonthConsumption, getCalen
 function ExpenseCalendar(state) {
   this.state = state ?? emptyCalendarState;
 
+  this.getState = () => ( this.state );
+
   this.operationWrapper = ( calendarState ) => ( date ) => (
     makeCalendarOperationWrapper(
       getCalendarYear( calendarState )( createYearString( date ) )

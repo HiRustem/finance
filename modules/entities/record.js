@@ -1,3 +1,5 @@
+var RECORD_ID_KEYWORD = 'recordId';
+
 var createRecord = 
   ( id ) =>
   ( currency ) => 
@@ -14,4 +16,4 @@ var createRecord =
     amount,
   });
 
-export { createRecord };
+export { createRecord, RECORD_ID_KEYWORD };

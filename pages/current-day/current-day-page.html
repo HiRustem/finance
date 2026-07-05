@@ -9,10 +9,14 @@
   <a href="../categories/categories-page.html">Categories Page</a>
 
   <h2>Current Month Main Information</h2>
+
   <p id="currentMonthIncomeParagraph">Current Month Income: <span style="font-weight: 600;">0</span></p>
   <p id="currentMonthConsumptionParagraph">Current Month Consumption: <span style="font-weight: 600;">0</span></p>
 
-  <h2 id="currentDayTableHeading">Current Month Table</h2>
+  <h2 id="currentDayTableHeading" style="display: flex; align-items: center; justify-content: space-between;">
+    <span>Current Month Table</span>
+    <button id="createRecordFormDialogOpenButton">Open Create Record Dialog</button>
+  </h2>
 
   <div id="currentDayTableNavigationButtons"></div>
 
@@ -28,10 +32,6 @@
     </thead>
     <tbody id="currentMonthTableBody"></tbody>
   </table>
-
-  <h2>Create New Record</h2>
-
-  <button id="createRecordFormDialogOpenButton">Open Create Record Dialog</button>
 
   <dialog id="createRecordFormDialog" closedby="any">
     <div id="createRecordFormDialogHeader" style="display: flex; justify-content: space-between; align-items: center; gap: 20px;">
@@ -67,9 +67,9 @@
 
   <template id="createRecordFormTemplate">
     <form style="display: flex; flex-direction: column; gap: 20px;">
-      <input id="recordName" name="recordName" type="text">
-      <textarea id="recordDescription" name="recordDescription"></textarea>
-      <input id="recordAmount" name="recordAmount" type="text">
+      <input id="recordName" name="recordName" type="text" placeholder="Enter record name">
+      <textarea id="recordDescription" name="recordDescription" placeholder="Enter record description"></textarea>
+      <input id="recordAmount" name="recordAmount" type="text" placeholder="Enter record amount">
 
       <p id="selectedCategoryParagraph">Selected Category: <span style="font-weight: 600;">none</span></p>
 
