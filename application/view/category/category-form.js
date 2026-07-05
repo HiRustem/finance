@@ -1,32 +1,29 @@
 import { CATEGORIES_TYPE, CATEGORY_ID_KEYWORD, createCategory } from "../../../modules/entities/category.js";
 import { generateId } from "../../../modules/entities/id.js";
 
-var renderCategoryFormDialog = ( categoryManager ) => ( categoryDataManager ) => ( onCategoryCreated ) => {
+var renderCategoryFormDialog = 
+  ( categoryManager ) => 
+  ( onCategoryCreated ) => {
   var cachedCreateCategoryFormObject = null;
 
   var createCategoryFormDialog = document.querySelector('#createCategoryFormDialog');
   var createCategoryFormDialogOpenButton = document.querySelector('#createCategoryFormDialogOpenButton');
   var createCategoryFormDialogCloseButton = createCategoryFormDialog.querySelector('button');
 
-  createCategoryFormDialogOpenButton.onclick = ( event ) => {
-    createCategoryFormDialog.showModal();
-  }
+  createCategoryFormDialogOpenButton.onclick = () => ( createCategoryFormDialog.showModal() );
 
-  createCategoryFormDialogCloseButton.onclick = () => (
-    createCategoryFormDialog.close()
-  )
+  createCategoryFormDialogCloseButton.onclick = () => ( createCategoryFormDialog.close() );
 
   var initCreateCategoryFormObject = () => {
     var createCategoryFormHeader = createCategoryFormDialog.querySelector('#createCategoryFormHeader');
 
     cachedCreateCategoryFormObject = (
       makeCreateCategoryFormObject( categoryManager )
-      ( categoryDataManager )
       ( CATEGORIES_TYPE )
       ( 
         () => (
           createCategoryFormDialog.close(),
-          onCategoryCreated()
+          onCategoryCreated?.()
         ) 
       ) 
     );
@@ -37,19 +34,14 @@ var renderCategoryFormDialog = ( categoryManager ) => ( categoryDataManager ) =>
   createCategoryFormDialog.addEventListener("beforetoggle", (e) => (
     requestAnimationFrame(() => (
       e.newState === 'open' 
-    ? (
-      !cachedCreateCategoryFormObject ? initCreateCategoryFormObject() : null
-      ) 
-    : (
-        cachedCreateCategoryFormObject.resetFields()
-      )
+      ? ( !cachedCreateCategoryFormObject ? initCreateCategoryFormObject() : null ) 
+      : ( cachedCreateCategoryFormObject.resetFields() )
     ))
   ));
 }
 
 var makeCreateCategoryFormObject = 
   ( categoryManager ) => 
-  ( categoryDataManager ) => 
   ( categoriesTypesEnum ) => 
   ( onCategoryCreated ) => 
   {
@@ -92,8 +84,6 @@ var makeCreateCategoryFormObject =
       );
 
       onCategoryCreated?.();
-
-      categoryDataManager.updateCategories( categoryManager.getState() );
     }
 
     var resetFields = () => {

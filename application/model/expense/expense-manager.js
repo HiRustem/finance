@@ -149,11 +149,24 @@ function ExpenseCalendar(state) {
     );
 
   this.getCurrentDay = () => (
-    getCalendarDay( this.state )( createYearString( new Date() ) )( createMonthString( new Date() ) )( createDayString( new Date() ) )
+    this.operationWrapper( this.state )( new Date() )(
+      () => (
+        getCalendarDay( this.state )
+        ( createYearString( new Date() ) )
+        ( createMonthString( new Date() ) )
+        ( createDayString( new Date() ) )
+      )
+    )
   );
 
   this.getCurrentMonth = () => (
-    getCalendarMonth( this.state )( createYearString( new Date() ) )( createMonthString( new Date() ) )
+    this.operationWrapper( this.state )( new Date() )(
+      () => (
+        getCalendarMonth( this.state )
+        ( createYearString( new Date() ) )
+        ( createMonthString( new Date() ) )
+      )
+    )
   );
 
   this.addRecord = ( record ) => (

@@ -1,7 +1,7 @@
 var RESULT_OBJECT_TYPES = Object.freeze({
-  NORMAL: Symbol( 'NORMAL' ),
-  ERROR: Symbol( 'ERROR' ),
-  RETURN: Symbol( 'RETURN' ),
+  NORMAL: 'NORMAL',
+  ERROR: 'ERROR',
+  RETURN: 'RETURN',
 });
 
 var createResultObject = 

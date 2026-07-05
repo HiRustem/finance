@@ -10,8 +10,15 @@
   <a href="../../index.html">Back to main</a>
 
   <h2>Categories Table</h2>
-  <table style="border: 1px solid black; border-collapse: collapse;">
-    <tbody id="categoryTable"></tbody>
+  <table style="width: 100%; border: 1px solid black; border-collapse: collapse;">
+    <thead>
+      <th style="border: 1px solid black; padding: 5px;">Id</th>
+      <th style="border: 1px solid black; padding: 5px;">Name</th>
+      <th style="border: 1px solid black; padding: 5px;">Description</th>
+      <th style="border: 1px solid black; padding: 5px;">Type</th>
+      <th style="border: 1px solid black; padding: 5px;">Actions</th>
+    </thead>
+    <tbody id="categoryTableBody"></tbody>
   </table>
 
   <button id="createCategoryFormDialogOpenButton">Create Category</button>
@@ -24,17 +31,11 @@
     </div>
   </dialog>
 
-  <template id="categoryRowHeadingTemplate">
-    <tr>
-      <th style="border: 1px solid black; padding: 5px;"></th>
-      <th style="border: 1px solid black; padding: 5px;"></th>
-      <th style="border: 1px solid black; padding: 5px;"></th>
-    </tr>
-  </template>
-
   <template id="categoryRowTemplate">
     <tr>
-      <th style="border: 1px solid black; padding: 5px;"></th>
+      <td style="border: 1px solid black; padding: 5px; font-weight: 600;"></td>
+      <td style="border: 1px solid black; padding: 5px;"></td>
+      <td style="border: 1px solid black; padding: 5px;"></td>
       <td style="border: 1px solid black; padding: 5px;"></td>
       <td style="border: 1px solid black; padding: 5px;"></td>
     </tr>

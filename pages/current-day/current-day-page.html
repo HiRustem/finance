@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Current Day</title>
+</head>
+<body>
+  <a href="../categories/categories-page.html">Categories Page</a>
+
+  <h2>Current Month Main Information</h2>
+  <p id="currentMonthIncomeParagraph">Current Month Income: <span style="font-weight: 600;">0</span></p>
+  <p id="currentMonthConsumptionParagraph">Current Month Consumption: <span style="font-weight: 600;">0</span></p>
+
+  <h2 id="currentDayTableHeading">Current Month Table</h2>
+
+  <div id="currentDayTableNavigationButtons"></div>
+
+  <table id="currentDayTable" style="width: 100%; border: 1px solid black; border-collapse: collapse;">
+    <thead>
+      <tr>
+        <th style="border: 1px solid black; padding: 5px;">Name</th>
+        <th style="border: 1px solid black; padding: 5px;">Description</th>
+        <th style="border: 1px solid black; padding: 5px;">Amount</th>
+        <th style="border: 1px solid black; padding: 5px;">Currency</th>
+        <th style="border: 1px solid black; padding: 5px;">Category name</th>
+      </tr>
+    </thead>
+    <tbody id="currentMonthTableBody"></tbody>
+  </table>
+
+  <h2>Create New Record</h2>
+
+  <button id="createRecordFormDialogOpenButton">Open Create Record Dialog</button>
+
+  <dialog id="createRecordFormDialog" closedby="any">
+    <div id="createRecordFormDialogHeader" style="display: flex; justify-content: space-between; align-items: center; gap: 20px;">
+      <h3>Create Record</h3>
+
+      <button>Close Dialog</button>
+    </div>
+  </dialog>
+
+  <dialog id="categoriesTableDialog" closedby="any">
+    <h4>Categories Table</h4>
+    <table style="width: 100%; border: 1px solid black; border-collapse: collapse;">
+      <thead>
+        <th style="border: 1px solid black; padding: 5px;">Id</th>
+        <th style="border: 1px solid black; padding: 5px;">Name</th>
+        <th style="border: 1px solid black; padding: 5px;">Description</th>
+        <th style="border: 1px solid black; padding: 5px;">Type</th>
+        <th style="border: 1px solid black; padding: 5px;">Actions</th>
+      </thead>
+      <tbody id="categoryTableBody"></tbody>
+    </table>
+  </dialog>
+
+  <template id="recordRowTemplate">
+    <tr>
+      <th style="border: 1px solid black; padding: 5px;"></th>
+      <td style="border: 1px solid black; padding: 5px;"></td>
+      <td style="border: 1px solid black; padding: 5px;"></td>
+      <td style="border: 1px solid black; padding: 5px;"></td>
+      <td style="border: 1px solid black; padding: 5px;"></td>
+    </tr>
+  </template>
+
+  <template id="createRecordFormTemplate">
+    <form style="display: flex; flex-direction: column; gap: 20px;">
+      <input id="recordName" name="recordName" type="text">
+      <textarea id="recordDescription" name="recordDescription"></textarea>
+      <input id="recordAmount" name="recordAmount" type="text">
+
+      <p id="selectedCategoryParagraph">Selected Category: <span style="font-weight: 600;">none</span></p>
+
+      <button type="button" id="selectCategoryButton">Open Select Category Dialog</button>
+
+      <button id="submitButton" type="submit">Create Record</button>
+    </form>
+  </template>
+
+  <template id="categoryRowTemplate">
+    <tr>
+      <td style="border: 1px solid black; padding: 5px; font-weight: 600;"></td>
+      <td style="border: 1px solid black; padding: 5px;"></td>
+      <td style="border: 1px solid black; padding: 5px;"></td>
+      <td style="border: 1px solid black; padding: 5px;"></td>
+      <td style="border: 1px solid black; padding: 5px;"></td>
+    </tr>
+  </template>
+
+  <script type="module" src="current-day.js"></script>
+</body>
+</html>

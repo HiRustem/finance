@@ -1,6 +1,6 @@
 var CATEGORIES_TYPE = Object.freeze({
-  INCOME: Symbol( 'INCOME' ),
-  CONSUMPTION: Symbol( 'CONSUMPTION' ),
+  INCOME: 'INCOME',
+  CONSUMPTION: 'CONSUMPTION',
 });
 
 var CATEGORY_ID_KEYWORD = 'categoryId';
