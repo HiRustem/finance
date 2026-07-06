@@ -1,15 +1,10 @@
-// TODO: fix double fillCurrentDayTableHeading and renderCurrentDayTableCaption work
-
 var renderCurrentDayTable = ( expenseCalendar ) => {
-
   var currentMonth = expenseCalendar.getCurrentMonth();
   var currentMonthDays = Object.values( currentMonth.days );
 
   var currentDayTable = document.querySelector('#currentDayTable');
   var currentMonthTableBody = document.querySelector('#currentMonthTableBody');
   var tableRowTemplate = document.querySelector('#recordRowTemplate');
-
-  fillCurrentDayTableHeading( currentMonth );
 
   var currentDay = getDefaultCurrentDay( currentMonthDays );
 
@@ -20,24 +15,16 @@ var renderCurrentDayTable = ( expenseCalendar ) => {
 
     if (!currentDay.records.length) return;
 
+    currentMonthTableBody.hasChildNodes() ? currentMonthTableBody.replaceChildren([]) : currentMonthTableBody;
+
     for (let i = 0; i < currentDay.records.length; i++) {
       currentMonthTableBody.appendChild(
         fillCurrentDayTableRecordRow
-        (
-          document.importNode( tableRowTemplate.content, true)
-        )
-        (
-          currentDay.records[i]
-        )
+        ( document.importNode( tableRowTemplate.content, true) )
+        ( currentDay.records[i] )
       );
     }
   });
-}
-
-var fillCurrentDayTableHeading = ( currentMonth ) => {
-  var currentDayTableHeading = document.querySelector('#currentDayTableHeading > span');
-
-  currentDayTableHeading.textContent = `${currentDayTableHeading.textContent} (${String(currentMonth.monthNumber).padStart(2, '0')}.${currentMonth.yearNumber})`;
 }
 
 var getDefaultCurrentDay = ( currentMonthDays ) => ( currentMonthDays[currentMonthDays.length - 1] );
@@ -45,10 +32,15 @@ var getDefaultCurrentDay = ( currentMonthDays ) => ( currentMonthDays[currentMon
 var renderCurrentDayTableCaption = 
 ( currentDayTable ) => 
 ( currentDayDate ) => {
+  var existedCaption = currentDayTable.querySelector('caption');
   var caption = document.createElement('caption');
 
   caption.textContent = currentDayDate;
   caption.style.paddingBlock = '10px';
+
+  if (!!existedCaption) {
+    existedCaption.remove();
+  };
 
   currentDayTable.appendChild( caption );
 }

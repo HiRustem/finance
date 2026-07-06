@@ -2,6 +2,7 @@ import { CategoryDataManager } from "../../application/model/category/category-d
 import { CategoryManager } from "../../application/model/category/category-manager.js";
 import { ExpenseDataManager } from "../../application/model/expense/expense-data-manager.js";
 import { ExpenseCalendar } from "../../application/model/expense/expense-manager.js";
+import { renderCurrentDayTableHeading } from "../../application/view/current-day/render-current-day-table-heading.js";
 import { renderCurrentDayTable } from "../../application/view/current-day/render-current-day-table.js";
 import { renderCurrentMonthInfo } from "../../application/view/current-month/render-current-month-info.js";
 import { renderCreateRecordFormDialog } from "../../application/view/record/render-create-record-form-dialog.js";
@@ -21,6 +22,7 @@ var expenseCalendar = new ExpenseCalendar(
 );
 
 renderCurrentMonthInfo( expenseCalendar );
+renderCurrentDayTableHeading( expenseCalendar.getCurrentMonth() );
 renderCurrentDayTable( expenseCalendar );
 renderCreateRecordFormDialog
 ( categoryManager )
